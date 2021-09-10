@@ -12,8 +12,8 @@ implement the PXE boot process. This network boot allows the manager to choose t
 Raspberrys.
 
 The PiSeduce resource manager consists of two projects: the
-[piseduce_webui](https://github.com/remyimt/piseduce_webui) project and the
-[piseduce_agent](https://github.com/remyimt/piseduce_agent) project. These both projects are hosted
+[piseduce_webui](https://github.com/SeduceProject/piseduce_webui) project and the
+[piseduce_agent](https://github.com/SeduceProject/piseduce_agent) project. These both projects are hosted
 on GitHub.
 
 The **piseduce_webui** project is the web interface of the resource manager. It also manages the
