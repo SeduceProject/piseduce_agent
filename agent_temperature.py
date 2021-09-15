@@ -42,7 +42,7 @@ while True:
             node = node_info[1]
             env = node_info[3]
             cmd = [
-                "ssh", "-o StrictHostKeyChecking=no",
+                "ssh", "-o StrictHostKeyChecking=no", "-o ConnectTimeout=2",
                 "%s@%s"%(env.ssh_user, node.ip),
                 "cat /sys/class/thermal/thermal_zone0/temp"
             ]
