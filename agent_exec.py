@@ -185,18 +185,17 @@ if __name__ == "__main__":
     if "ip" in get_config():
         my_ip = get_config()["ip"]
     else:
-        cmd = "hostname -i"
+        cmd = "ip route | grep eth0"
         process = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         my_ip = process.stdout.decode("utf-8").split()
+        print(my_ip)
         if len(my_ip) > 0:
-            my_ip = my_ip[0]
+            my_ip = my_ip[8]
         if len(my_ip) == 0 or len(my_ip.split(".")) != 4:
-            # Try another command
-            cmd = "hostname -I"
-            process = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-            my_ip = process.stdout.decode("utf-8").split()
-            if len(my_ip) > 0:
-                my_ip = my_ip[0]
+            msg = "Fail to retrieve the pimaster IP. Output: %s" % my_ip
+            logging.error(msg)
+            print(msg)
+            sys.exit(2)
     # Update the pimaster information of the database
     pimaster_info = db.query(RaspNode).filter(RaspNode.name == "pimaster").first()
     if len(my_user) > 0 and len(my_ip) > 0 and len(my_ip.split(".")) == 4:
