@@ -26,6 +26,10 @@ class ActionProperty(Base):
     owner = Column(Text, primary_key=True)
 
 
+    def __repr__(self):
+        return "action_prop(%s, %s, %s)" % (self.node_name, self.prop_name, self.prop_value)
+
+
 class Schedule(Base):
     __tablename__ = 'schedule'
     node_name = Column(Text, primary_key=True)
@@ -78,6 +82,10 @@ class RaspEnvironment(Base):
     ssh_user = Column(Text)
     web = Column(Boolean)
     state = Column(Text, nullable=False)
+
+
+    def __repr__(self):
+        return "environment(%s)" % (self.name)
 
 
 # Table for IoT-Lab agents

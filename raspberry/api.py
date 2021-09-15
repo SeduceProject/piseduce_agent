@@ -588,6 +588,25 @@ def node_state(arg_dict):
     return json.dumps(result)
 
 
+def node_temperature(arg_dict):
+    result = []
+    # Configure the influx client
+    influx = InfluxDBClient(host="localhost", port=8086)
+    influx_dbs = [info["name"] for info in influx.get_list_database()]
+    if "monitoring" not in influx_dbs:
+        logging.error("No 'monitoring' database")
+        return json.dumps({})
+    influx_query = "SELECT * FROM temperature_C WHERE "
+    if "period" in arg_dict:
+        influx_query += "time > now() - %s " % arg_dict["period"]
+    else:
+        influx_query += "time > now() - 1h "
+    influx.switch_database('monitoring')
+    influx_res = influx.query(influx_query, epoch="s")
+    result += list(influx_res.get_points())
+    return json.dumps(result)
+
+
 def switch_list(arg_dict):
     db = open_session()
     # Get the switches

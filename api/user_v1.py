@@ -117,6 +117,35 @@ def environment_list():
     return getattr(api_exec_mod, "environment_list")(flask.request.json)
 
 
+# List the switches (only used by administrators but the URL must be in /user/)
+@user_v1.route("/node/temperature", methods=["POST"])
+@auth
+def node_temperature():
+    """
+    Read the power consumption of the ports of the switch from the Influx DB.
+    JSON parameters: 'period'
+    Example of return value:
+    [
+        {
+            "time": 1631101186,
+            "consumption": 49,
+            "node": "imt-1"
+        },
+        {
+            "time": 1631101188,
+            "consumption": 60,
+            "node": "imt-23"
+        },
+        {
+            "time": 1631101186,
+            "consumption": 59,
+            "node": "imt-23"
+        }
+    ]
+    """
+    return getattr(api_exec_mod, "node_temperature")(flask.request.json)
+
+
 @user_v1.route("/node/state", methods=["POST"])
 @auth
 def node_state():
