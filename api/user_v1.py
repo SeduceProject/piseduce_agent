@@ -117,7 +117,6 @@ def environment_list():
     return getattr(api_exec_mod, "environment_list")(flask.request.json)
 
 
-# List the switches (only used by administrators but the URL must be in /user/)
 @user_v1.route("/node/temperature", methods=["POST"])
 @auth
 def node_temperature():

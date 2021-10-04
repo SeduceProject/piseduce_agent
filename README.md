@@ -24,3 +24,7 @@ infrastructure, e.g., the Raspberrys. To manage the Raspberrys, the agent can co
 SSH connections.
 
 [Read More](https://doc.seduce.fr/2021-07-22-manager-basis/)
+
+## Agent API
+The description of the agent API is available at
+[api_description.md](api_description.md).
