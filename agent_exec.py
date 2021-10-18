@@ -185,7 +185,7 @@ if __name__ == "__main__":
     if "ip" in get_config():
         my_ip = get_config()["ip"]
     else:
-        cmd = "ip route | grep eth0"
+        cmd = 'ip route | grep "link src"'
         process = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
         my_ip = process.stdout.decode("utf-8").split()
         print(my_ip)
