@@ -183,7 +183,7 @@ def node_deploy(arg_dict):
             # Remove special characters from the node bin name
             safe_value = safe_string(node_prop[n.node_name].pop("node_bin"))
             # Remove spaces from value
-            safe_value = safe_value.replace(" ", "_")
+            safe_value = safe_value.replace(" ", "_").replace(".", "_")
             node_bin = safe_value
             result[n.node_name] = {}
             # Check required properties
